@@ -1,0 +1,84 @@
+/* App.css */
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: radial-gradient(circle, #1a0033 0%, #0d001a 100%);
+  color: #ffd700;
+  /* gold */
+}
+
+.container {
+  text-align: center;
+  padding: 30px;
+  color: #ffd700;
+}
+
+h1 {
+  font-size: 2.5rem;
+  text-shadow: 0 0 10px #ffcc00, 0 0 20px #ffcc00;
+  margin-bottom: 20px;
+}
+
+.scoreboard p {
+  font-weight: bold;
+  margin: 5px 0;
+  color: #ffcc00;
+  font-size: 1.2rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(6, 80px);
+  gap: 12px;
+  justify-content: center;
+  margin: 30px auto;
+}
+
+.square {
+  width: 80px;
+  height: 80px;
+  border-radius: 10px;
+  border: 2px solid #ffd700;
+  background-color: #220033;
+  box-shadow: 0 0 10px #6600cc;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.square:hover {
+  border-color: #ffcc00;
+  box-shadow: 0 0 15px #ffcc00;
+}
+
+.square.clicked {
+  opacity: 0.4;
+  cursor: default;
+  background-color: #3d0066;
+  border: 2px solid #ff66cc;
+  box-shadow: none;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-weight: bold;
+  font-size: 1rem;
+  background: linear-gradient(145deg, #ffcc00, #ffaa00);
+  border: none;
+  border-radius: 8px;
+  color: #1a001a;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(255, 204, 0, 0.4);
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: linear-gradient(145deg, #ffee58, #fdd835);
+}
+
+p {
+  font-size: 1.1rem;
+  color: #ffeb3b;
+  text-shadow: 0 0 5px #ffeb3b;
+}
