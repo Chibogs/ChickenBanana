@@ -95,25 +95,45 @@ function App() {
       </div>
       <p>{message}</p>
       <div className="grid">
-        {tiles.map((tileType, index) => {
-          const isClicked = clickedTiles[index];
-          const imgSrc = isClicked
-            ? (tileType === 'chicken' ? chickenImg : bananaImg)
-            : coverImg;
+{tiles.map((tileType, index) => {
+  const isClicked = clickedTiles[index];
+  const isCurrent = currentPlayer === tileType && !isClicked;
 
-          const isCurrent = currentPlayer === tileType && !isClicked;
+  return (
+    <div
+      key={index}
+      className={`square ${isClicked ? 'clicked' : ''} ${isCurrent ? 'current-player' : ''}`}
+      onClick={() => handleClick(index)}
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        fontSize: '20px',
+        fontWeight: 'bold',
+        userSelect: 'none',
+        color: isClicked ? 'transparent' : '#ffd700',
+        cursor: isClicked ? 'default' : 'pointer',
+      }}
+    >
+      {isClicked ? (
+        <img
+          src={tileType === 'chicken' ? chickenImg : bananaImg}
+          alt={tileType}
+          style={{
+            width: '100%',
+            height: '100%',
+            borderRadius: '10px',
+            imageRendering: 'pixelated',
+          }}
+          draggable={false}
+        />
+      ) : (
+        index + 1
+      )}
+    </div>
+  );
+})}
 
-          return (
-            <img
-              key={index}
-              src={imgSrc}
-              alt={tileType}
-              className={`square ${isClicked ? 'clicked' : ''} ${isCurrent ? 'current-player' : ''}`}
-              onClick={() => handleClick(index)}
-              draggable={false}
-            />
-          );
-        })}
       </div>
       <button onClick={restartGame}>Restart Game</button>
       <p><i>Current turn: {currentPlayer === 'chicken' ? 'Chicken Player' : 'Banana Player'}</i></p>

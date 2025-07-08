@@ -2,16 +2,16 @@
 
 body {
   margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Press Start 2P', cursive, monospace;
   background: radial-gradient(circle, #1a0033 0%, #0d001a 100%);
   color: #ffd700;
-  /* gold */
 }
 
 .container {
   text-align: center;
   padding: 30px;
   color: #ffd700;
+  font-family: 'Press Start 2P', cursive, monospace;
 }
 
 h1 {
@@ -44,6 +44,11 @@ h1 {
   box-shadow: 0 0 10px #6600cc;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
+  image-rendering: pixelated;
+}
+
+p, h1, .scoreboard p, button {
+  text-shadow: 1px 1px #000; /* gives a bit of pixel contrast */
 }
 
 .square:hover {
