@@ -5,7 +5,6 @@ const TILE_COUNT = 36;
 
 const chickenImg = 'https://thumbs.dreamstime.com/z/full-body-brown-chicken-hen-standing-isolated-white-backgroun-background-use-farm-animals-livestock-theme-49741285.jpg?ct=jpeg';
 const bananaImg = 'https://thumbs.dreamstime.com/b/bunch-bananas-6175887.jpg?w=768';
-const coverImg = '/images/cloche.jpg';  
 
 function generateTiles() {
   const assignments = Array(TILE_COUNT).fill('chicken').fill('banana', 18);
@@ -27,25 +26,26 @@ function App() {
   const [player2TilesLeft, setPlayer2TilesLeft] = useState(18);
   const [gameOver, setGameOver] = useState(false);
 
+  // NEW state to reveal all tiles for checking distribution
+  const [revealAll, setRevealAll] = useState(false);
+
   const handleClick = (index) => {
-    if (gameOver) return;
+    if (gameOver || revealAll) return; // disable clicks when revealing all
 
     if (clickedTiles[index]) {
       setMessage('Tile already clicked!');
       return;
     }
 
-    // Flip the tile to reveal image
     const newClicked = [...clickedTiles];
     newClicked[index] = true;
     setClickedTiles(newClicked);
 
-    // Check if the revealed tile matches current player's type
     if (tiles[index] !== currentPlayer) {
       setMessage(`Wrong tile! ${currentPlayer === 'chicken' ? 'Banana' : 'Chicken'} player wins! +5 points`);
       if (currentPlayer === 'chicken') {
         setPlayer2Score((score) => score + 5);
-      } else {  
+      } else {
         setPlayer1Score((score) => score + 5);
       }
       setGameOver(true);
@@ -95,47 +95,62 @@ function App() {
       </div>
       <p>{message}</p>
       <div className="grid">
-{tiles.map((tileType, index) => {
-  const isClicked = clickedTiles[index];
-  const isCurrent = currentPlayer === tileType && !isClicked;
+        {tiles.map((tileType, index) => {
+          const isClicked = clickedTiles[index];
+          // Reveal if clicked or if revealAll is true
+          const shouldReveal = revealAll || isClicked;
+          const isCurrent = currentPlayer === tileType && !shouldReveal;
 
-  return (
-    <div
-      key={index}
-      className={`square ${isClicked ? 'clicked' : ''} ${isCurrent ? 'current-player' : ''}`}
-      onClick={() => handleClick(index)}
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: '20px',
-        fontWeight: 'bold',
-        userSelect: 'none',
-        color: isClicked ? 'transparent' : '#ffd700',
-        cursor: isClicked ? 'default' : 'pointer',
-      }}
-    >
-      {isClicked ? (
-        <img
-          src={tileType === 'chicken' ? chickenImg : bananaImg}
-          alt={tileType}
-          style={{
-            width: '100%',
-            height: '100%',
-            borderRadius: '10px',
-            imageRendering: 'pixelated',
-          }}
-          draggable={false}
-        />
-      ) : (
-        index + 1
-      )}
-    </div>
-  );
-})}
-
+          return (
+            <div
+              key={index}
+              className={`square ${shouldReveal ? 'clicked' : ''} ${isCurrent ? 'current-player' : ''}`}
+              onClick={() => {
+                if (!revealAll) handleClick(index);
+              }}
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                fontSize: '20px',
+                fontWeight: 'bold',
+                userSelect: 'none',
+                color: shouldReveal ? 'transparent' : '#ffd700',
+                cursor: shouldReveal ? 'default' : 'pointer',
+              }}
+            >
+              {shouldReveal ? (
+                <img
+                  src={tileType === 'chicken' ? chickenImg : bananaImg}
+                  alt={tileType}
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    borderRadius: '10px',
+                    imageRendering: 'pixelated',
+                  }}
+                  draggable={false}
+                />
+              ) : (
+                index + 1
+              )}
+            </div>
+          );
+        })}
       </div>
-      <button onClick={restartGame}>Restart Game</button>
+
+      {/* Show one button or the other based on revealAll state */}
+      {!revealAll ? (
+        <button onClick={() => setRevealAll(true)}>Reveal Distribution</button>
+      ) : (
+        <button onClick={() => {
+          setRevealAll(false);
+          restartGame();
+        }}>
+          Start Game
+        </button>
+      )}
+
       <p><i>Current turn: {currentPlayer === 'chicken' ? 'Chicken Player' : 'Banana Player'}</i></p>
     </div>
   );
