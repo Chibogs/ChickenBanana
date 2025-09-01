@@ -31,15 +31,15 @@ To run this project locally, follow these steps:
    git clone <repository-url>
    
 2. Navigate to the project directory:
-
-cd chicken-banana
+   ```bash
+   cd chicken-banana
 
 3. Install dependencies:
-
-npm install
+   ```bash
+   npm install
 
 4. Start the development server:
-
-npm start
-
+   ```bash
+   npm start
+   
 The app will be available at http://localhost:3000.
