@@ -2,7 +2,7 @@
 
 A modern, responsive tile-clicking game built with React. Choose your side and find all your tiles before your opponent!
 
-![Game Screenshot](public/logo512.png)
+![Game Screenshot](public/screenshot/choose%20side.png)
 
 ## 🎮 About
 
