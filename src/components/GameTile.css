@@ -1,0 +1,147 @@
+.game-tile {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #2c1810 0%, #1a0f08 100%);
+  border: 2px solid #ffd700;
+  box-shadow: 
+    0 4px 8px rgba(0, 0, 0, 0.3),
+    inset 0 1px 2px rgba(255, 215, 0, 0.2);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  min-height: 60px;
+}
+
+.game-tile:hover:not(.clicked):not(.revealed) {
+  transform: translateY(-2px);
+  border-color: #ffeb3b;
+  box-shadow: 
+    0 6px 16px rgba(0, 0, 0, 0.4),
+    0 0 20px rgba(255, 235, 59, 0.3),
+    inset 0 1px 2px rgba(255, 215, 0, 0.3);
+}
+
+.game-tile:active:not(.clicked):not(.revealed) {
+  transform: translateY(0);
+}
+
+.game-tile:focus {
+  outline: 2px solid #ffeb3b;
+  outline-offset: 2px;
+}
+
+.game-tile.clicked {
+  background: linear-gradient(135deg, #3d1a78 0%, #2d0a5c 100%);
+  border-color: #9c27b0;
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.game-tile.revealed .tile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.tile-number {
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  font-weight: 700;
+  color: #ffd700;
+  text-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.8),
+    0 0 10px rgba(255, 215, 0, 0.5);
+  z-index: 2;
+  position: relative;
+}
+
+.tile-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 215, 0, 0.1) 0%,
+    transparent 50%,
+    rgba(255, 215, 0, 0.1) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.game-tile:hover .tile-overlay {
+  opacity: 1;
+}
+
+.tile-shine {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 70%
+  );
+  transform: rotate(45deg);
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  }
+  50% {
+    transform: translateX(0%) translateY(0%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+  }
+}
+
+.game-tile.clicked .tile-shine {
+  animation: none;
+}
+
+/* Accessibility improvements */
+.game-tile:focus-visible {
+  outline: 3px solid #ffeb3b;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .game-tile {
+    transition: none;
+  }
+  
+  .tile-shine {
+    animation: none;
+  }
+  
+  .game-tile:hover:not(.clicked):not(.revealed) {
+    transform: none;
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .game-tile {
+    border-radius: 8px;
+    border-width: 1.5px;
+  }
+  
+  .tile-number {
+    font-size: clamp(0.8rem, 2vw, 1.2rem);
+  }
+}
