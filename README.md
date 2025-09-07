@@ -202,24 +202,4 @@ npm run deploy
 4. Push to branch: `git push origin feature-name`
 5. Submit a pull request
 
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 👨‍💻 Author
-
-**Senior Frontend Developer**
-- Modern React application architecture
-- Responsive design implementation
-- Accessibility and performance optimization
-
-## 🙏 Acknowledgments
-
-- React team for the amazing framework
-- Unsplash for beautiful images
-- Modern CSS techniques and best practices
-- Accessibility guidelines and standards
-
----
-
 **Enjoy playing Chicken Banana! 🐔🍌**
