@@ -1,0 +1,136 @@
+.game-message {
+  width: 100%;
+  max-width: 600px;
+  margin: 1rem auto;
+  padding: 1rem;
+  border-radius: 12px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  border: 1px solid;
+  animation: messageSlideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.game-message::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  animation: messageShine 2s infinite;
+}
+
+.message-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  position: relative;
+  z-index: 1;
+}
+
+.message-icon {
+  font-size: 1.5rem;
+  animation: iconBounce 2s infinite;
+}
+
+.message-text {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+/* Message types */
+.game-message.info {
+  background: linear-gradient(135deg, rgba(33, 150, 243, 0.2) 0%, rgba(33, 150, 243, 0.1) 100%);
+  border-color: rgba(33, 150, 243, 0.5);
+  color: #64b5f6;
+}
+
+.game-message.success {
+  background: linear-gradient(135deg, rgba(76, 175, 80, 0.2) 0%, rgba(76, 175, 80, 0.1) 100%);
+  border-color: rgba(76, 175, 80, 0.5);
+  color: #81c784;
+}
+
+.game-message.error {
+  background: linear-gradient(135deg, rgba(244, 67, 54, 0.2) 0%, rgba(244, 67, 54, 0.1) 100%);
+  border-color: rgba(244, 67, 54, 0.5);
+  color: #e57373;
+}
+
+.game-message.turn {
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.2) 0%, rgba(255, 215, 0, 0.1) 100%);
+  border-color: rgba(255, 215, 0, 0.5);
+  color: #ffd700;
+}
+
+.game-message.warning {
+  background: linear-gradient(135deg, rgba(255, 152, 0, 0.2) 0%, rgba(255, 152, 0, 0.1) 100%);
+  border-color: rgba(255, 152, 0, 0.5);
+  color: #ffb74d;
+}
+
+/* Animations */
+@keyframes messageSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes messageShine {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+@keyframes iconBounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-4px);
+  }
+  60% {
+    transform: translateY(-2px);
+  }
+}
+
+/* Mobile responsive */
+@media (max-width: 576px) {
+  .game-message {
+    margin: 0.75rem;
+    padding: 0.75rem;
+  }
+  
+  .message-content {
+    gap: 0.5rem;
+  }
+  
+  .message-icon {
+    font-size: 1.25rem;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .game-message,
+  .message-icon {
+    animation: none;
+  }
+  
+  .game-message::before {
+    display: none;
+  }
+}

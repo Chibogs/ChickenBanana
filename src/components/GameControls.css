@@ -1,0 +1,136 @@
+.game-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  flex-wrap: wrap;
+}
+
+.control-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  border: 2px solid transparent;
+  min-width: 120px;
+  justify-content: center;
+}
+
+.control-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.control-button:hover::before {
+  left: 100%;
+}
+
+.control-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.control-button:active {
+  transform: translateY(0);
+}
+
+.control-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.control-button:disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.new-game-button {
+  background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+  color: white;
+  border-color: rgba(76, 175, 80, 0.3);
+  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+}
+
+.new-game-button:hover {
+  background: linear-gradient(135deg, #5cbf60 0%, #4caf50 100%);
+  border-color: rgba(76, 175, 80, 0.5);
+  box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
+}
+
+.quit-button {
+  background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
+  color: white;
+  border-color: rgba(244, 67, 54, 0.3);
+  box-shadow: 0 4px 15px rgba(244, 67, 54, 0.3);
+}
+
+.quit-button:hover {
+  background: linear-gradient(135deg, #f66356 0%, #f44336 100%);
+  border-color: rgba(244, 67, 54, 0.5);
+  box-shadow: 0 8px 25px rgba(244, 67, 54, 0.4);
+}
+
+.button-icon {
+  font-size: 1.2rem;
+}
+
+.button-text {
+  font-family: inherit;
+  letter-spacing: 0.5px;
+}
+
+/* Mobile responsive */
+@media (max-width: 576px) {
+  .game-controls {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .control-button {
+    width: 100%;
+    max-width: 200px;
+    padding: 1rem;
+  }
+}
+
+/* Focus accessibility */
+.control-button:focus {
+  outline: 3px solid rgba(255, 255, 255, 0.5);
+  outline-offset: 2px;
+}
+
+.control-button:focus-visible {
+  outline: 3px solid rgba(255, 255, 255, 0.8);
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .control-button {
+    transition: none;
+  }
+  
+  .control-button::before {
+    display: none;
+  }
+  
+  .control-button:hover {
+    transform: none;
+  }
+}
